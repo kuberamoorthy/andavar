@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Now - Andavar Travels | Online Booking</title>
+  <meta name="description" content="Book your ride online with Andavar Travels. Choose vehicle, calculate price, and confirm booking instantly via WhatsApp. Local, Airport, Days, Long Trip packages.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Book Your <span class="gold">Ride</span></h1>
+      <p class="breadcrumb"><a href="index.html">Home</a> / Booking</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <!-- TRIP TYPE TABS -->
+      <div class="booking-tabs" id="bookingTabs">
+        <div class="booking-tab active" data-type="local">🏙️ Local Trip</div>
+        <div class="booking-tab" data-type="days">📅 Days Package</div>
+        <div class="booking-tab" data-type="airport">✈️ Airport</div>
+        <div class="booking-tab" data-type="long">🛣️ Long Trip</div>
+        <div class="booking-tab" data-type="tour">🏖️ Tour Package</div>
+        <div class="booking-tab" data-type="navagraha">🕉️ Navagraha Trip</div>
+      </div>
+
+      <div class="booking-form-wrap">
+        <div id="airportBanner" style="display:none; margin-bottom: 24px; border-radius: 12px; overflow: hidden; height: 180px; position: relative;">
+          <img src="images/airport-banner-new.png" alt="Airport Transfer" style="width: 100%; height: 100%; object-fit: cover;">
+          <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px 20px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; font-weight: 700; font-size: 1.2rem;">Premium Airport Transfers</div>
+        </div>
+        <div id="navagrahaBanner" style="display:none; margin-bottom: 24px; border-radius: 12px; overflow: hidden; height: 180px;">
+          <img src="images/navagraha-banner.png" alt="Navagraha Trip" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div id="navagrahaTemples" style="display:none; margin-bottom: 32px;">
+          <h3 style="text-align: center; margin-bottom: 20px; font-weight: 800; color: var(--primary);">9 Navagraha Temples You Will Visit</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">🌕</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Kailasanathar Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Thingalur (Moon)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">🪐</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Apatsahayesvarar Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Alangudi (Jupiter)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">🌑</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Naganathar Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Thirunageswaram (Rahu)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">☀️</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Suriyanar Kovil</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Thirumangalakkudi (Sun)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">✨</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Agniswarar Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Kanjanur (Venus)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">🔴</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Vaitheeswaran Koil</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Vaitheeswaran (Mars)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">💫</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Swetharanyeswarar Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Thiruvenkadu (Mercury)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">☄️</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Nagannathaswamy Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Keezhaperumpallam (Ketu)</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: var(--dark-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--dark-border);">
+              <div style="width: 48px; height: 48px; background: rgba(0, 53, 128, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; color: var(--primary);">🪐</div>
+              <div><h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Dharbaranyeswarar Temple</h4><p style="font-size: 0.8rem; color: var(--text-muted);">Thirunallar (Saturn)</p></div>
+            </div>
+          </div>
+        </div>
+        <form id="bookingForm">
+          <!-- ROW 1: Name & Mobile -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="b-name">Full Name *</label>
+              <input type="text" id="b-name" class="form-control" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="b-mobile">Mobile Number *</label>
+              <input type="tel" id="b-mobile" class="form-control" placeholder="Enter mobile number" required>
+            </div>
+          </div>
+
+          <!-- ROW 2: Date & Time -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="b-date">Date *</label>
+              <input type="date" id="b-date" class="form-control" required>
+            </div>
+            <div class="form-group" id="group-time">
+              <label for="b-time">Time *</label>
+              <input type="time" id="b-time" class="form-control" required>
+            </div>
+            <div class="form-group" id="group-fixed-time" style="display:none;">
+              <label>Time</label>
+              <input type="text" class="form-control" value="5:00 AM to 10:00 PM" disabled>
+            </div>
+          </div>
+
+          <!-- ROW 3: Pickup & Drop -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="b-pickup">Pickup Location *</label>
+              <input type="text" id="b-pickup" class="form-control" placeholder="Enter pickup address" required>
+            </div>
+            <div class="form-group">
+              <label for="b-drop">Drop Location *</label>
+              <input type="text" id="b-drop" class="form-control" placeholder="Enter drop address" required>
+            </div>
+          </div>
+
+          <!-- DYNAMIC DURATION / KM & AC -->
+          <div class="form-row">
+            <div class="form-group" id="group-hours" style="display:none;">
+              <label for="b-hours">Duration Package *</label>
+              <select id="b-hours" class="form-control">
+                <option value="">Select duration</option>
+                <option value="3">3 Hours / 50 KM</option>
+                <option value="6">6 Hours / 100 KM</option>
+                <option value="9">9 Hours / 150 KM</option>
+                <option value="12">12 Hours / 200 KM</option>
+              </select>
+            </div>
+            <div class="form-group" id="group-airport" style="display:none;">
+              <label for="b-airport">Select Airport *</label>
+              <select id="b-airport" class="form-control">
+                <option value="">Select Airport Option</option>
+                <option value="trichy">Kumbakonam ⇄ Trichy Airport</option>
+                <option value="chennai">Kumbakonam ⇄ Chennai Airport</option>
+                <option value="other">Other Airport (Calculate by KM)</option>
+              </select>
+            </div>
+            <div class="form-group" id="group-km" style="display:none;">
+              <label for="b-totalkm" id="label-km">Estimated KM *</label>
+              <input type="number" id="b-totalkm" class="form-control" placeholder="Enter estimated KM" min="1">
+            </div>
+            <div class="form-group" id="group-persons" style="display:none;">
+              <label for="b-persons">How Many Persons? *</label>
+              <input type="number" id="b-persons" class="form-control" placeholder="E.g., 5" min="1" max="50">
+            </div>
+            <div class="form-group">
+              <label for="b-ac">AC / Non AC *</label>
+              <select id="b-ac" class="form-control" required>
+                <option value="">Select type</option>
+                <option value="ac">AC</option>
+                <option value="nonac">Non AC</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- VEHICLE SELECT -->
+          <div class="form-group" id="group-vehicle">
+            <label>Select Vehicle *</label>
+            <div class="vehicle-select-grid" id="vehicleGrid"></div>
+            <input type="hidden" id="b-vehicle" required>
+          </div>
+
+          <!-- EXTRA KM & HOURS (Only for Package) -->
+          <div class="form-row" id="extraInputs" style="display:none;">
+            <div class="form-group">
+              <label for="b-extrakm">Extra KM (if any)</label>
+              <input type="number" id="b-extrakm" class="form-control" placeholder="0" value="0" min="0">
+            </div>
+            <div class="form-group">
+              <label for="b-extrahrs">Extra Hours (if any)</label>
+              <input type="number" id="b-extrahrs" class="form-control" placeholder="0" value="0" min="0">
+            </div>
+          </div>
+
+          <!-- Night Driver -->
+          <div class="form-group">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="b-night" style="width:20px; height:20px; accent-color:var(--primary);">
+              <span>Night Driver Bata (₹500) — for trips between 10 PM - 6 AM</span>
+            </label>
+          </div>
+
+          <!-- PRICE DISPLAY -->
+          <div class="price-display" id="priceDisplay" style="display:none;">
+            <div class="price-label">Estimated Trip Cost</div>
+            <div class="price-amount" id="priceAmount">₹0</div>
+            <div class="price-breakdown" id="priceBreakdown"></div>
+            <div class="price-note">* Toll, parking, police charges & driver food extra</div>
+          </div>
+
+          <!-- BUTTONS -->
+          <div style="display:flex; gap:16px; margin-top:28px; flex-wrap:wrap;">
+            <button type="button" id="calcBtn" class="btn btn-outline" style="flex:1; justify-content:center;">💰 Calculate Price</button>
+            <button type="submit" id="bookBtn" class="btn btn-primary" style="flex:1; justify-content:center;">📱 Book Now via WhatsApp</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
+  <script src="booking.js"></script>
+  <script>
+    document.getElementById('nav-placeholder').innerHTML = renderNavbar('booking');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+  </script>
+</body>
+</html>
