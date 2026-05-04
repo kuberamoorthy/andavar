@@ -74,12 +74,10 @@ function renderNavbar(activePage) {
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" style="text-decoration: none;">
         <div class="css-logo">
-          <span class="tree">🌴</span>
           <div class="text-wrap">
             <div class="main-text"><span class="red-a">A</span><span class="white-text">NDAVAR</span></div>
             <div class="sub-text">TRAVELS</div>
           </div>
-          <span class="tree">🌴</span>
         </div>
       </a>
       <div class="nav-links" id="navLinks">
@@ -105,12 +103,10 @@ function renderFooter() {
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="css-logo" style="margin-bottom: 16px;">
-            <span class="tree">🌴</span>
             <div class="text-wrap">
               <div class="main-text"><span class="red-a">A</span><span class="white-text">NDAVAR</span></div>
               <div class="sub-text">TRAVELS</div>
             </div>
-            <span class="tree">🌴</span>
           </div>
           <p>848, Karaikal Main Road, Muthupillaimandapam, Kumbakonam. Your trusted travel partner for all your journey needs.</p>
         </div>
