@@ -74,6 +74,7 @@ function renderNavbar(activePage) {
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" style="text-decoration: none;">
         <div class="css-logo">
+          <div class="logo-emblem">🚗</div>
           <div class="text-wrap">
             <div class="main-text"><span class="red-a">A</span><span class="white-text">NDAVAR</span></div>
             <div class="sub-text">TRAVELS</div>
