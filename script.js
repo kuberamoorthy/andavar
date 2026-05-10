@@ -73,13 +73,7 @@ function renderNavbar(activePage) {
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" style="text-decoration: none;">
-        <div class="css-logo">
-          <div class="logo-emblem">🚗</div>
-          <div class="text-wrap">
-            <div class="main-text"><span class="red-a">A</span><span class="white-text">NDAVAR</span></div>
-            <div class="sub-text">TRAVELS</div>
-          </div>
-        </div>
+        <img src="logo.png?v=3" alt="Andavar Travels" style="height: 90px; width: auto; object-fit: contain;">
       </a>
       <div class="nav-links" id="navLinks">
         <a href="index.html" class="${activePage === 'home' ? 'active' : ''}">Home</a>
@@ -103,12 +97,7 @@ function renderFooter() {
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="css-logo" style="margin-bottom: 16px;">
-            <div class="text-wrap">
-              <div class="main-text"><span class="red-a">A</span><span class="white-text">NDAVAR</span></div>
-              <div class="sub-text">TRAVELS</div>
-            </div>
-          </div>
+          <img src="logo.png?v=3" alt="Andavar Travels" style="height: 120px; width: auto; object-fit: contain; margin-bottom: 16px;">
           <p>848, Karaikal Main Road, Muthupillaimandapam, Kumbakonam. Your trusted travel partner for all your journey needs.</p>
         </div>
         <div>

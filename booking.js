@@ -1,21 +1,22 @@
 // ===== VEHICLE DATA & PRICING =====
 const vehicles = [
   { id: 'swift-nonac', name: 'Swift / Etios', ac: 'nonac', seats: '4+1', type: 'Sedan', img: 'swift-etios.png', prices: { 3: 1000, 6: 1500, 9: 2400, 12: 3000 }, extraKm: 11, extraHr: 100 },
-  { id: 'swift-ac', name: 'Swift / Etios', ac: 'ac', seats: '4+1', type: 'Sedan', img: 'swift-etios.png', prices: { 3: 1200, 6: 1800, 9: 2700, 12: 3500 }, extraKm: 12, extraHr: 100 },
+  { id: 'swift-ac', name: 'Swift / Etios', ac: 'ac', seats: '4+1', type: 'Sedan', img: 'Etios.png', prices: { 3: 1200, 6: 1800, 9: 2700, 12: 3500 }, extraKm: 12, extraHr: 100 },
   { id: 'xylo-nonac', name: 'Xylo / Tavera', ac: 'nonac', seats: '6+1', type: 'SUV', img: 'xylo-tavera.png', prices: { 3: 1400, 6: 2000, 9: 3200, 12: 4000 }, extraKm: 14, extraHr: 150 },
-  { id: 'xylo-ac', name: 'Xylo / Tavera', ac: 'ac', seats: '6+1', type: 'SUV', img: 'xylo-tavera.png', prices: { 3: 1800, 6: 2500, 9: 3700, 12: 4500 }, extraKm: 15, extraHr: 150 },
-  { id: 'innova-ac', name: 'Innova', ac: 'ac', seats: '7+1', type: 'MPV', img: 'innova.png', prices: { 3: null, 6: 2500, 9: null, 12: 5000 }, extraKm: 16, extraHr: 200 },
+  { id: 'xylo-ac', name: 'Xylo / Tavera', ac: 'ac', seats: '6+1', type: 'SUV', img: 'Tavera.png', prices: { 3: 1800, 6: 2500, 9: 3700, 12: 4500 }, extraKm: 15, extraHr: 150 },
+  { id: 'innova-ac', name: 'Innova', ac: 'ac', seats: '7+1', type: 'MPV', img: 'innova.png?v=2', prices: { 3: null, 6: 2500, 9: null, 12: 5000 }, extraKm: 16, extraHr: 200 },
   { id: 'crysta-ac', name: 'Crysta', ac: 'ac', seats: '7+1', type: 'Premium MPV', img: 'crysta.png', prices: { 3: null, 6: 3000, 9: null, 12: 6000 }, extraKm: 17, extraHr: 200 },
   { id: 'van16-nonac', name: 'Van (16 Seat)', ac: 'nonac', seats: '16', type: 'Van', img: 'van.png', prices: { 3: null, 6: 3000, 9: null, 12: 5500 }, extraKm: 20, extraHr: 250 },
   { id: 'van21-nonac', name: 'Van (17 Seat)', ac: 'nonac', seats: '17', type: 'Van', img: 'van.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
-  { id: 'van21-ac', name: 'Van (17 Seat)', ac: 'ac', seats: '17', type: 'Van', img: 'van.png', prices: { 3: null, 6: null, 9: null, 12: 8500 }, extraKm: 28, extraHr: 280 },
-  { id: 'urbania16-ac', name: 'Urbania (16 Seat)', ac: 'ac', seats: '16', type: 'Premium Van', img: 'urbania.png', prices: { 3: null, 6: null, 9: null, 12: 11000 }, extraKm: 40, extraHr: 300 },
+  { id: 'van21-ac', name: 'Van (21 Seat)', ac: 'ac', seats: '21', type: 'Van', img: 'van.png', prices: { 3: null, 6: null, 9: null, 12: 8000 }, extraKm: 28, extraHr: 280 },
+  { id: 'urbania16-ac', name: 'Force Urbania (16 Seat)', ac: 'ac', seats: '16', type: 'Premium Van', img: 'urbania.png?v=4', prices: { 3: null, 6: null, 9: null, 12: 11000 }, extraKm: 40, extraHr: 300 },
   { id: 'tempo14-nonac', name: 'Tempo (14 Seat)', ac: 'nonac', seats: '14', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 3500, 9: null, 12: 6000 }, extraKm: 22, extraHr: 250 },
   { id: 'tempo14-ac', name: 'Tempo (14 Seat)', ac: 'ac', seats: '14', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
   { id: 'tempo18-nonac', name: 'Tempo (18 Seat)', ac: 'nonac', seats: '18', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 4000, 9: null, 12: 7500 }, extraKm: 26, extraHr: 250 },
   { id: 'tempo18-ac', name: 'Tempo (18 Seat)', ac: 'ac', seats: '18', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 4500, 9: null, 12: 8000 }, extraKm: 28, extraHr: 250 },
   { id: 'coach22-nonac', name: 'Coach (21 Seat)', ac: 'nonac', seats: '21', type: 'Bus', img: 'coach.png', prices: { 3: null, 6: null, 9: null, 12: 7500 }, extraKm: 26, extraHr: 250 },
   { id: 'coach22-ac', name: 'Coach (21 Seat)', ac: 'ac', seats: '21', type: 'Bus', img: 'coach.png', prices: { 3: null, 6: null, 9: null, 12: 8500 }, extraKm: 30, extraHr: 250 },
+  { id: 'coach25-nonac', name: 'Coach (25 Seat)', ac: 'nonac', seats: '25', type: 'Bus', img: 'coach.png', prices: { 3: null, 6: null, 9: null, 12: 8500 }, extraKm: 30, extraHr: 280 },
   { id: 'coach25-ac', name: 'Coach (25 Seat)', ac: 'ac', seats: '25', type: 'Bus', img: 'coach.png', prices: { 3: null, 6: null, 9: null, 12: 9500 }, extraKm: 32, extraHr: 250 },
 ];
 
@@ -67,12 +68,16 @@ function updateDynamicInputs() {
   const groupTime = document.getElementById('group-time');
   const groupFixedTime = document.getElementById('group-fixed-time');
   const groupVehicle = document.getElementById('group-vehicle');
+  const groupHillsDiesel = document.getElementById('group-hills-diesel');
+  const groupLongDates = document.getElementById('group-long-dates');
 
   // Reset displays
   groupHours.style.display = 'none';
   groupKm.style.display = 'none';
   if (groupAirport) groupAirport.style.display = 'none';
   if (groupPersons) groupPersons.style.display = 'none';
+  if (groupHillsDiesel) groupHillsDiesel.style.display = 'none';
+  if (groupLongDates) groupLongDates.style.display = 'none';
   extraInputs.style.display = 'none';
   if (airportBanner) airportBanner.style.display = 'none';
   if (navagrahaBanner) navagrahaBanner.style.display = 'none';
@@ -87,6 +92,10 @@ function updateDynamicInputs() {
   if (document.getElementById('b-time')) document.getElementById('b-time').required = true;
   if (document.getElementById('b-airport')) document.getElementById('b-airport').required = false;
   if (document.getElementById('b-persons')) document.getElementById('b-persons').required = false;
+  if (groupLongDates) {
+    document.getElementById('b-dropdate').required = false;
+    document.getElementById('b-days').required = false;
+  }
 
   if (currentTripType === 'days') {
     groupHours.style.display = 'block';
@@ -117,10 +126,34 @@ function updateDynamicInputs() {
         groupVehicle.style.display = 'none';
       }
     }
+  } else if (currentTripType === 'local') {
+    // Local trips just book the vehicle without upfront KM estimate
   } else {
+    // Long trip or other
     groupKm.style.display = 'block';
     document.getElementById('b-totalkm').required = true;
     document.getElementById('label-km').textContent = 'Estimated KM *';
+    if (groupLongDates && (currentTripType === 'long' || currentTripType === 'tour')) {
+      groupLongDates.style.display = 'flex';
+      document.getElementById('b-dropdate').required = true;
+      document.getElementById('b-days').required = true;
+    }
+    if (groupHillsDiesel && (currentTripType === 'long' || currentTripType === 'tour')) {
+      groupHillsDiesel.style.display = 'block';
+    }
+  }
+
+  // Change Drop Location to Vacation Location for Long and Tour trips
+  const dropLabel = document.getElementById('label-drop');
+  const dropInput = document.getElementById('b-drop');
+  if (dropLabel && dropInput) {
+    if (currentTripType === 'long' || currentTripType === 'tour') {
+      dropLabel.textContent = 'Vacation Location *';
+      dropInput.placeholder = 'Enter vacation location';
+    } else {
+      dropLabel.textContent = 'Drop Location *';
+      dropInput.placeholder = 'Enter drop address';
+    }
   }
 }
 
@@ -214,7 +247,7 @@ function setupListeners() {
   document.getElementById('calcBtn').addEventListener('click', calculatePrice);
 
   // Auto calculate on field change
-  ['b-hours', 'b-totalkm', 'b-extrakm', 'b-extrahrs', 'b-night', 'b-airport', 'b-persons'].forEach(id => {
+  ['b-hours', 'b-totalkm', 'b-extrakm', 'b-extrahrs', 'b-night', 'b-hills-diesel', 'b-airport', 'b-persons'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', () => {
       if (id === 'b-airport') updateDynamicInputs();
@@ -330,6 +363,22 @@ function calculatePrice(e) {
     breakdown += `<div class="price-row"><span>1 Day Navagraha Trip (5 AM - 10 PM) — ${vehicle.name} ${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}</span><span>₹${basePrice.toLocaleString('en-IN')}</span></div>`;
     if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
     breakdown += `<div class="price-note" style="color:var(--text-light); font-size:0.85rem; margin-top:8px;">* Temple parking, driver food, and police charges (if any) are separate.</div>`;
+  } else if (currentTripType === 'local') {
+    const nightCost = nightBata ? 500 : 0;
+    total = nightCost;
+    
+    breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'})</span><span>₹${vehicle.extraKm} / km</span></div>`;
+    if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
+    breakdown += `<div class="price-note" style="color:var(--text-light); font-size:0.85rem; margin-top:8px;">* Final price calculated based on actual distance traveled.</div>`;
+    
+    priceDisplay.style.display = 'block';
+    document.getElementById('priceAmount').textContent = `₹${vehicle.extraKm} / KM`;
+    document.getElementById('priceBreakdown').innerHTML = breakdown;
+    
+    if (isClick) {
+      priceDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return;
   } else {
     const totalKm = parseInt(document.getElementById('b-totalkm').value);
     if (!totalKm || totalKm <= 0) {
@@ -340,10 +389,12 @@ function calculatePrice(e) {
 
     const kmCost = totalKm * vehicle.extraKm;
     const nightCost = nightBata ? 500 : 0;
+    const hillsDiesel = document.getElementById('b-hills-diesel') && document.getElementById('b-hills-diesel').checked;
     total = kmCost + nightCost;
 
     breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}) — ${totalKm} KM × ₹${vehicle.extraKm}/km</span><span>₹${kmCost.toLocaleString('en-IN')}</span></div>`;
     if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
+    if (hillsDiesel) breakdown += `<div class="price-row"><span>Hills Station Diesel Allowance</span><span>Charges separate</span></div>`;
   }
 
   breakdown += `<div class="price-row"><span>Total Estimated Cost</span><span>₹${total.toLocaleString('en-IN')}</span></div>`;
@@ -370,6 +421,9 @@ function handleBooking(e) {
   const drop = document.getElementById('b-drop').value.trim();
   const acType = document.getElementById('b-ac').value;
   const nightBata = document.getElementById('b-night').checked;
+  const hillsDiesel = document.getElementById('b-hills-diesel') && document.getElementById('b-hills-diesel').checked;
+  const dropDate = document.getElementById('b-dropdate') ? document.getElementById('b-dropdate').value : '';
+  const travelDays = document.getElementById('b-days') ? document.getElementById('b-days').value : '';
 
   if (!selectedVehicleId) {
     alert('Please select a vehicle.');
@@ -464,6 +518,14 @@ function handleBooking(e) {
     priceInfo = `Fixed Trip Fare: ₹${basePrice.toLocaleString('en-IN')}\n`;
     priceInfo += `(Temple parking, driver food, and police charges separate)\n`;
     if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
+  } else if (currentTripType === 'local') {
+    const nightCost = nightBata ? 500 : 0;
+    total = nightCost;
+    
+    packageInfo = `🏙️ *Local Trip*\n`;
+    priceInfo = `Per KM Rate: ₹${vehicle.extraKm}/km\n`;
+    priceInfo += `(Final price based on actual usage)\n`;
+    if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
   } else {
     const totalKm = document.getElementById('b-totalkm').value;
     if (!totalKm) {
@@ -476,8 +538,12 @@ function handleBooking(e) {
     total = kmCost + nightCost;
 
     packageInfo = `📏 *Estimated KM:* ${totalKm} KM\n`;
+    if (hillsDiesel) {
+      packageInfo += `🏔️ *Hills Station Trip:* Yes\n`;
+    }
     priceInfo = `${totalKm} KM × ₹${vehicle.extraKm}/km: ₹${kmCost.toLocaleString('en-IN')}\n`;
     if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
+    if (hillsDiesel) priceInfo += `Hills Allowance: Charges separate\n`;
   }
 
   const tripTypes = { local: 'Local Trip', days: 'Days Package', airport: 'Airport Transfer', long: 'Long Trip', tour: 'Tour Package', navagraha: 'Navagraha Trip' };
@@ -487,14 +553,19 @@ function handleBooking(e) {
   msg += `📋 *Trip Type:* ${tripTypes[currentTripType] || 'Local Trip'}\n`;
   msg += `👤 *Name:* ${name}\n`;
   msg += `📞 *Mobile:* ${mobile}\n`;
-  msg += `📅 *Date:* ${date}\n`;
+  msg += `📅 *Pickup Date:* ${date}\n`;
+  if ((currentTripType === 'long' || currentTripType === 'tour') && dropDate) {
+    msg += `📅 *Return Date:* ${dropDate}\n`;
+    msg += `⏱️ *Travel Duration:* ${travelDays} Days\n`;
+  }
   if (currentTripType === 'navagraha') {
     msg += `⏰ *Time:* 5:00 AM to 10:00 PM (Fixed)\n`;
   } else {
     msg += `⏰ *Time:* ${time}\n`;
   }
   msg += `📍 *Pickup:* ${pickup}\n`;
-  msg += `📍 *Drop:* ${drop}\n\n`;
+  let dropLocationText = (currentTripType === 'long' || currentTripType === 'tour') ? 'Vacation Location' : 'Drop';
+  msg += `📍 *${dropLocationText}:* ${drop}\n\n`;
   msg += `🚗 *Vehicle:* ${vehicle.name} (${acType === 'ac' ? 'AC' : 'Non AC'})\n`;
   
   const persons = document.getElementById('b-persons') ? document.getElementById('b-persons').value : '';
