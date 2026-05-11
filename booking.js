@@ -6,9 +6,9 @@ const vehicles = [
   { id: 'xylo-ac', name: 'Xylo / Tavera', ac: 'ac', seats: '6+1', type: 'SUV', img: 'Tavera.png', prices: { 3: 1800, 6: 2500, 9: 3700, 12: 4500 }, extraKm: 15, extraHr: 150 },
   { id: 'innova-ac', name: 'Innova', ac: 'ac', seats: '7+1', type: 'MPV', img: 'innova.png?v=2', prices: { 3: null, 6: 2500, 9: null, 12: 5000 }, extraKm: 16, extraHr: 200 },
   { id: 'crysta-ac', name: 'Crysta', ac: 'ac', seats: '7+1', type: 'Premium MPV', img: 'crysta.png', prices: { 3: null, 6: 3000, 9: null, 12: 6000 }, extraKm: 17, extraHr: 200 },
-  { id: 'van16-nonac', name: 'Van (16 Seat)', ac: 'nonac', seats: '16', type: 'Van', img: 'van.png', prices: { 3: null, 6: 3000, 9: null, 12: 5500 }, extraKm: 20, extraHr: 250 },
-  { id: 'van21-nonac', name: 'Van (19 Seat)', ac: 'nonac', seats: '19', type: 'Van', img: 'van.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
-  { id: 'van21-ac', name: 'Van (21 Seat)', ac: 'ac', seats: '21', type: 'Van', img: 'van.png', prices: { 3: null, 6: null, 9: null, 12: 8000 }, extraKm: 28, extraHr: 280 },
+  { id: 'van17-nonac', name: 'Van (17 Seat)', ac: 'nonac', seats: '17', type: 'Van', img: 'van.png', prices: { 3: null, 6: 3000, 9: null, 12: 5500 }, extraKm: 20, extraHr: 250 },
+  { id: 'van19-nonac', name: 'Van (19 Seat)', ac: 'nonac', seats: '19', type: 'Van', img: 'van.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
+  { id: 'van19-ac', name: 'Van (19 Seat)', ac: 'ac', seats: '19', type: 'Van', img: 'van.png', prices: { 3: null, 6: null, 9: null, 12: 8000 }, extraKm: 28, extraHr: 280 },
   { id: 'urbania16-ac', name: 'Force Urbania (16 Seat)', ac: 'ac', seats: '16', type: 'Premium Van', img: 'urbania.png?v=4', prices: { 3: null, 6: null, 9: null, 12: 11000 }, extraKm: 40, extraHr: 300 },
   { id: 'tempo14-nonac', name: 'Tempo (14 Seat)', ac: 'nonac', seats: '14', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 3500, 9: null, 12: 6000 }, extraKm: 22, extraHr: 250 },
   { id: 'tempo14-ac', name: 'Tempo (14 Seat)', ac: 'ac', seats: '14', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
@@ -72,6 +72,8 @@ function updateDynamicInputs() {
   const groupLongDates = document.getElementById('group-long-dates');
   const groupLocalKm = document.getElementById('group-local-km');
   const groupPermits = document.getElementById('group-permits');
+  const groupNightDriver = document.getElementById('group-night-driver');
+  const groupNightHalt = document.getElementById('group-night-halt');
 
   // Reset displays
   groupHours.style.display = 'none';
@@ -82,6 +84,8 @@ function updateDynamicInputs() {
   if (groupHillsDiesel) groupHillsDiesel.style.display = 'none';
   if (groupLongDates) groupLongDates.style.display = 'none';
   if (groupPermits) groupPermits.style.display = 'none';
+  if (groupNightDriver) groupNightDriver.style.display = 'none';
+  if (groupNightHalt) groupNightHalt.style.display = 'none';
   extraInputs.style.display = 'none';
   if (airportBanner) airportBanner.style.display = 'none';
   if (navagrahaBanner) navagrahaBanner.style.display = 'none';
@@ -89,6 +93,14 @@ function updateDynamicInputs() {
   if (groupTime) groupTime.style.display = 'block';
   if (groupFixedTime) groupFixedTime.style.display = 'none';
   if (groupVehicle) groupVehicle.style.display = 'block';
+
+  // Uncheck night options if not on long/tour trips
+  if (currentTripType !== 'long' && currentTripType !== 'tour') {
+    const bNight = document.getElementById('b-night');
+    const bHalt = document.getElementById('b-halt');
+    if (bNight) bNight.checked = false;
+    if (bHalt) bHalt.checked = false;
+  }
 
   // Reset required
   document.getElementById('b-hours').required = false;
@@ -149,6 +161,12 @@ function updateDynamicInputs() {
     if (groupPermits && (currentTripType === 'long' || currentTripType === 'tour')) {
       groupPermits.style.display = 'block';
     }
+    if (groupNightDriver && (currentTripType === 'long' || currentTripType === 'tour')) {
+      groupNightDriver.style.display = 'block';
+    }
+    if (groupNightHalt && (currentTripType === 'long' || currentTripType === 'tour')) {
+      groupNightHalt.style.display = 'block';
+    }
   }
 
   // Change Drop Location to Vacation Location for Long and Tour trips
@@ -177,8 +195,8 @@ function renderVehicleGrid() {
       'swift-nonac': 5000, 'swift-ac': 5500,
       'xylo-nonac': 6600, 'xylo-ac': 7200,
       'innova-ac': 7600, 'crysta-ac': 8700,
-      'van16-nonac': 9500, 'van21-nonac': 10800,
-      'van21-ac': 13000, 'urbania16-ac': 16000,
+      'van17-nonac': 9500, 'van19-nonac': 10800,
+      'van19-ac': 13000, 'urbania16-ac': 16000,
       'tempo14-nonac': 10000, 'tempo14-ac': 11000,
       'tempo18-nonac': 12000, 'tempo18-ac': 13000,
       'coach22-nonac': 12000, 'coach22-ac': 13500,
@@ -255,7 +273,7 @@ function setupListeners() {
   document.getElementById('calcBtn').addEventListener('click', calculatePrice);
 
   // Auto calculate on field change
-  ['b-hours', 'b-totalkm', 'b-localkm', 'b-extrakm', 'b-night', 'b-hills-diesel', 'b-permit-kerala', 'b-permit-pondicherry', 'b-airport', 'b-persons'].forEach(id => {
+  ['b-hours', 'b-totalkm', 'b-localkm', 'b-extrakm', 'b-night', 'b-halt', 'b-hills-diesel', 'b-permit-kerala', 'b-permit-pondicherry', 'b-airport', 'b-persons'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', () => {
       if (id === 'b-airport') updateDynamicInputs();
@@ -286,6 +304,7 @@ function calculatePrice(e) {
   if (!vehicle) return;
 
   const nightBata = document.getElementById('b-night').checked;
+  const nightHalt = document.getElementById('b-halt').checked;
   let total = 0;
   let breakdown = '';
 
@@ -306,14 +325,13 @@ function calculatePrice(e) {
 
     const extraKm = parseInt(document.getElementById('b-extrakm').value) || 0;
     const extraKmCost = extraKm * vehicle.extraKm;
-    const nightCost = nightBata ? 500 : 0;
 
-    total = basePrice + extraKmCost + nightCost;
+    total = basePrice + extraKmCost;
 
     const durationKm = { 3: 50, 6: 100, 9: 150, 12: 200 };
     breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}) — ${duration} hrs / ${durationKm[duration]} km</span><span>₹${basePrice.toLocaleString('en-IN')}</span></div>`;
     if (extraKmCost > 0) breakdown += `<div class="price-row"><span>Extra ${extraKm} KM × ₹${vehicle.extraKm}/km</span><span>₹${extraKmCost.toLocaleString('en-IN')}</span></div>`;
-    if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
+    breakdown += `<div style="color: #d97706; font-size: 0.8rem; margin-top: 8px; font-weight: 600; line-height: 1.4; border-top: 1px dashed #eee; padding-top: 8px;">⚠️ Only up to 2 extra hours can be added to any package (charged extra). Exceeding 2 hours will charge the next higher package rate.</div>`;
   } else if (currentTripType === 'airport' && document.getElementById('b-airport').value !== 'other') {
     const airport = document.getElementById('b-airport').value;
     if (!airport) {
@@ -336,18 +354,16 @@ function calculatePrice(e) {
     }
 
     const airportName = airport === 'trichy' ? 'Trichy Airport' : 'Chennai Airport';
-    const nightCost = nightBata ? 500 : 0;
-    total = basePrice + nightCost;
+    total = basePrice;
 
     breakdown += `<div class="price-row"><span>Kumbakonam ⇄ ${airportName} (${vehicle.name} ${vehicle.ac === 'ac' ? 'AC' : 'Non AC'})</span><span>₹${basePrice.toLocaleString('en-IN')}</span></div>`;
-    if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
   } else if (currentTripType === 'navagraha') {
     const navagrahaPrices = {
       'swift-nonac': 5000, 'swift-ac': 5500,
       'xylo-nonac': 6600, 'xylo-ac': 7200,
       'innova-ac': 7600, 'crysta-ac': 8700,
-      'van16-nonac': 9500, 'van21-nonac': 10800,
-      'van21-ac': 13000, 'urbania16-ac': 16000,
+      'van17-nonac': 9500, 'van19-nonac': 10800,
+      'van19-ac': 13000, 'urbania16-ac': 16000,
       'tempo14-nonac': 10000, 'tempo14-ac': 11000,
       'tempo18-nonac': 12000, 'tempo18-ac': 13000,
       'coach22-nonac': 12000, 'coach22-ac': 13500,
@@ -362,11 +378,9 @@ function calculatePrice(e) {
       return;
     }
 
-    const nightCost = nightBata ? 500 : 0;
-    total = basePrice + nightCost;
+    total = basePrice;
 
     breakdown += `<div class="price-row"><span>1 Day Navagraha Trip (5 AM - 10 PM) — ${vehicle.name} ${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}</span><span>₹${basePrice.toLocaleString('en-IN')}</span></div>`;
-    if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
     breakdown += `<div class="price-note" style="color:var(--text-light); font-size:0.85rem; margin-top:8px;">* Temple parking, driver food, and police charges (if any) are separate.</div>`;
   } else if (currentTripType === 'local') {
     // Local trip: no price display, just booking
@@ -381,17 +395,22 @@ function calculatePrice(e) {
     }
 
     const kmCost = totalKm * vehicle.extraKm;
-    const nightCost = nightBata ? 500 : 0;
     const hillsDiesel = document.getElementById('b-hills-diesel') && document.getElementById('b-hills-diesel').checked;
     const permitKerala = document.getElementById('b-permit-kerala') && document.getElementById('b-permit-kerala').checked;
     const permitPondi = document.getElementById('b-permit-pondicherry') && document.getElementById('b-permit-pondicherry').checked;
-    total = kmCost + nightCost;
+    total = kmCost;
 
     breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}) — ${totalKm} KM × ₹${vehicle.extraKm}/km</span><span>₹${kmCost.toLocaleString('en-IN')}</span></div>`;
-    if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
     if (hillsDiesel) breakdown += `<div class="price-row"><span>Hills Station Diesel Allowance</span><span>Charges separate</span></div>`;
     if (permitKerala) breakdown += `<div class="price-row"><span>Kerala State Permit</span><span>Charges separate</span></div>`;
     if (permitPondi) breakdown += `<div class="price-row"><span>Pondicherry State Permit</span><span>Charges separate</span></div>`;
+  }
+
+  if (nightBata) {
+    breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>Charges separate</span></div>`;
+  }
+  if (nightHalt) {
+    breakdown += `<div class="price-row"><span>Night Halt Charges</span><span>Charges separate</span></div>`;
   }
 
   breakdown += `<div class="price-row"><span>Total Estimated Cost</span><span>₹${total.toLocaleString('en-IN')}</span></div>`;
@@ -418,6 +437,7 @@ function handleBooking(e) {
   const drop = document.getElementById('b-drop').value.trim();
   const acType = document.getElementById('b-ac').value;
   const nightBata = document.getElementById('b-night').checked;
+  const nightHalt = document.getElementById('b-halt').checked;
   const hillsDiesel = document.getElementById('b-hills-diesel') && document.getElementById('b-hills-diesel').checked;
   const permitKerala = document.getElementById('b-permit-kerala') && document.getElementById('b-permit-kerala').checked;
   const permitPondi = document.getElementById('b-permit-pondicherry') && document.getElementById('b-permit-pondicherry').checked;
@@ -452,15 +472,14 @@ function handleBooking(e) {
     }
 
     const extraKmCost = extraKm * vehicle.extraKm;
-    const nightCost = nightBata ? 500 : 0;
-    total = basePrice + extraKmCost + nightCost;
+    total = basePrice + extraKmCost;
 
     const durationKm = { 3: 50, 6: 100, 9: 150, 12: 200 };
     packageInfo = `⏱️ *Package:* ${duration} Hours / ${durationKm[parseInt(duration)]} KM\n`;
     
     priceInfo = `Base Package: ₹${basePrice.toLocaleString('en-IN')}\n`;
     if (extraKmCost > 0) priceInfo += `Extra ${extraKm} KM: ₹${extraKmCost.toLocaleString('en-IN')}\n`;
-    if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
+    priceInfo += `*(⚠️ Only up to 2 extra hours can be added; otherwise, next higher package is charged.)*\n`;
   } else if (currentTripType === 'airport' && document.getElementById('b-airport').value !== 'other') {
     const airport = document.getElementById('b-airport').value;
     if (!airport) {
@@ -481,19 +500,17 @@ function handleBooking(e) {
     }
 
     const airportName = airport === 'trichy' ? 'Trichy Airport' : 'Chennai Airport';
-    const nightCost = nightBata ? 500 : 0;
-    total = basePrice + nightCost;
+    total = basePrice;
 
     packageInfo = `✈️ *Airport Transfer:* Kumbakonam ⇄ ${airportName}\n`;
     priceInfo = `Fixed Trip Fare: ₹${basePrice.toLocaleString('en-IN')}\n`;
-    if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
   } else if (currentTripType === 'navagraha') {
     const navagrahaPrices = {
       'swift-nonac': 5000, 'swift-ac': 5500,
       'xylo-nonac': 6600, 'xylo-ac': 7200,
       'innova-ac': 7600, 'crysta-ac': 8700,
-      'van16-nonac': 9500, 'van21-nonac': 10800,
-      'van21-ac': 13000, 'urbania16-ac': 16000,
+      'van17-nonac': 9500, 'van19-nonac': 10800,
+      'van19-ac': 13000, 'urbania16-ac': 16000,
       'tempo14-nonac': 10000, 'tempo14-ac': 11000,
       'tempo18-nonac': 12000, 'tempo18-ac': 13000,
       'coach22-nonac': 12000, 'coach22-ac': 13500,
@@ -507,13 +524,11 @@ function handleBooking(e) {
       return;
     }
 
-    const nightCost = nightBata ? 500 : 0;
-    total = basePrice + nightCost;
+    total = basePrice;
 
     packageInfo = `🕉️ *Package:* 1 Day Navagraha Trip (5 AM - 10 PM)\n`;
     priceInfo = `Fixed Trip Fare: ₹${basePrice.toLocaleString('en-IN')}\n`;
     priceInfo += `(Temple parking, driver food, and police charges separate)\n`;
-    if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
   } else if (currentTripType === 'local') {
     // Local trip: simple booking, no price
     packageInfo = `🏙️ *Local Trip*\n`;
@@ -526,8 +541,7 @@ function handleBooking(e) {
     }
 
     const kmCost = parseInt(totalKm) * vehicle.extraKm;
-    const nightCost = nightBata ? 500 : 0;
-    total = kmCost + nightCost;
+    total = kmCost;
 
     packageInfo = `📏 *Estimated KM:* ${totalKm} KM\n`;
     if (hillsDiesel) {
@@ -540,10 +554,18 @@ function handleBooking(e) {
       packageInfo += `🏖️ *Pondicherry Permit:* Yes\n`;
     }
     priceInfo = `${totalKm} KM × ₹${vehicle.extraKm}/km: ₹${kmCost.toLocaleString('en-IN')}\n`;
-    if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
     if (hillsDiesel) priceInfo += `Hills Allowance: Charges separate\n`;
     if (permitKerala) priceInfo += `Kerala Permit: Charges separate\n`;
     if (permitPondi) priceInfo += `Pondicherry Permit: Charges separate\n`;
+  }
+
+  if (nightBata) {
+    packageInfo += `🌙 *Night Driver Bata:* Yes (Charges separate)\n`;
+    priceInfo += `Night Driver Bata: Charges separate\n`;
+  }
+  if (nightHalt) {
+    packageInfo += `🏨 *Night Halt:* Yes (Charges separate)\n`;
+    priceInfo += `Night Halt Charges: Charges separate\n`;
   }
 
   const tripTypes = { local: 'Local Trip', days: 'Days Package', airport: 'Airport Transfer', long: 'Long Trip', tour: 'Tour Package', navagraha: 'Navagraha Trip' };

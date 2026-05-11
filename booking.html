@@ -225,6 +225,9 @@
                 <option value="9">9 Hours / 150 KM</option>
                 <option value="12">12 Hours / 200 KM</option>
               </select>
+              <div class="form-note" style="font-size: 0.8rem; color: #d97706; margin-top: 6px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                ⚠️ Note: Only up to 2 extra hours can be added to any package (charged extra). Exceeding 2 hours will charge the next higher package rate.
+              </div>
             </div>
             <div class="form-group" id="group-airport" style="display:none;">
               <label for="b-airport">Select Airport *</label>
@@ -279,11 +282,18 @@
             </div>
           </div>
 
-          <!-- Night Driver -->
-          <div class="form-group">
+          <!-- Night Driver & Night Halt -->
+          <div class="form-group" id="group-night-driver" style="display:none;">
             <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
               <input type="checkbox" id="b-night" style="width:20px; height:20px; accent-color:var(--primary);">
-              <span>Night Driver Bata (₹500) — for trips between 10 PM - 6 AM</span>
+              <span>Night Driver Bata — for trips between 10 PM - 6 AM (Charges separate)</span>
+            </label>
+          </div>
+
+          <div class="form-group" id="group-night-halt" style="display:none;">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="b-halt" style="width:20px; height:20px; accent-color:var(--primary);">
+              <span>Night Halt — for overnight outstation stays (Charges separate)</span>
             </label>
           </div>
 

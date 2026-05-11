@@ -124,7 +124,6 @@ function renderFooter() {
             <li><a href="tel:8610890499">📞 86108 90499</a></li>
             <li><a href="tel:8489574003">📞 84895 74003</a></li>
             <li><a href="mailto:andavarcab123@gmail.com">✉️ andavarcab123@gmail.com</a></li>
-            <li><a href="https://www.instagram.com/andavar_travels?igsh=MW41ZGgwYzhudjgwcg==" target="_blank" rel="noopener">📸 @andavar_travels</a></li>
             <li><a href="contact.html">📍 Kumbakonam</a></li>
           </ul>
         </div>
