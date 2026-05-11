@@ -295,6 +295,21 @@
             </label>
           </div>
 
+          <!-- State Permits (Only for Long Trip / Tour Package) -->
+          <div class="form-group" id="group-permits" style="display:none; margin-bottom: 20px;">
+            <label style="display:block; font-weight: 500; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-muted);">State Permit Options (Select if travelling outside Tamil Nadu)</label>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px;">
+              <label style="display:flex; align-items:center; gap:10px; cursor:pointer; background: var(--dark-surface); padding: 12px 18px; border-radius: var(--radius-sm); border: 1px solid var(--dark-border); flex: 1; min-width: 180px;">
+                <input type="checkbox" id="b-permit-kerala" style="width:20px; height:20px; accent-color:var(--primary);">
+                <span>🌴 Kerala Permit</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; cursor:pointer; background: var(--dark-surface); padding: 12px 18px; border-radius: var(--radius-sm); border: 1px solid var(--dark-border); flex: 1; min-width: 180px;">
+                <input type="checkbox" id="b-permit-pondicherry" style="width:20px; height:20px; accent-color:var(--primary);">
+                <span>🏖️ Pondicherry Permit</span>
+              </label>
+            </div>
+          </div>
+
           <!-- PRICE DISPLAY -->
           <div class="price-display" id="priceDisplay" style="display:none;">
             <div class="price-label">Estimated Trip Cost</div>

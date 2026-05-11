@@ -1346,6 +1346,11 @@ textarea.form-control {
     gap: 16px;
   }
 
+  .google-reviews-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
   .booking-tab {
     padding: 10px 18px;
     font-size: 0.85rem;

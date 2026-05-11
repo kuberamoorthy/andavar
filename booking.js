@@ -71,6 +71,7 @@ function updateDynamicInputs() {
   const groupHillsDiesel = document.getElementById('group-hills-diesel');
   const groupLongDates = document.getElementById('group-long-dates');
   const groupLocalKm = document.getElementById('group-local-km');
+  const groupPermits = document.getElementById('group-permits');
 
   // Reset displays
   groupHours.style.display = 'none';
@@ -80,6 +81,7 @@ function updateDynamicInputs() {
   if (groupPersons) groupPersons.style.display = 'none';
   if (groupHillsDiesel) groupHillsDiesel.style.display = 'none';
   if (groupLongDates) groupLongDates.style.display = 'none';
+  if (groupPermits) groupPermits.style.display = 'none';
   extraInputs.style.display = 'none';
   if (airportBanner) airportBanner.style.display = 'none';
   if (navagrahaBanner) navagrahaBanner.style.display = 'none';
@@ -143,6 +145,9 @@ function updateDynamicInputs() {
     }
     if (groupHillsDiesel && (currentTripType === 'long' || currentTripType === 'tour')) {
       groupHillsDiesel.style.display = 'block';
+    }
+    if (groupPermits && (currentTripType === 'long' || currentTripType === 'tour')) {
+      groupPermits.style.display = 'block';
     }
   }
 
@@ -250,7 +255,7 @@ function setupListeners() {
   document.getElementById('calcBtn').addEventListener('click', calculatePrice);
 
   // Auto calculate on field change
-  ['b-hours', 'b-totalkm', 'b-localkm', 'b-extrakm', 'b-night', 'b-hills-diesel', 'b-airport', 'b-persons'].forEach(id => {
+  ['b-hours', 'b-totalkm', 'b-localkm', 'b-extrakm', 'b-night', 'b-hills-diesel', 'b-permit-kerala', 'b-permit-pondicherry', 'b-airport', 'b-persons'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', () => {
       if (id === 'b-airport') updateDynamicInputs();
@@ -378,11 +383,15 @@ function calculatePrice(e) {
     const kmCost = totalKm * vehicle.extraKm;
     const nightCost = nightBata ? 500 : 0;
     const hillsDiesel = document.getElementById('b-hills-diesel') && document.getElementById('b-hills-diesel').checked;
+    const permitKerala = document.getElementById('b-permit-kerala') && document.getElementById('b-permit-kerala').checked;
+    const permitPondi = document.getElementById('b-permit-pondicherry') && document.getElementById('b-permit-pondicherry').checked;
     total = kmCost + nightCost;
 
     breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}) — ${totalKm} KM × ₹${vehicle.extraKm}/km</span><span>₹${kmCost.toLocaleString('en-IN')}</span></div>`;
     if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
     if (hillsDiesel) breakdown += `<div class="price-row"><span>Hills Station Diesel Allowance</span><span>Charges separate</span></div>`;
+    if (permitKerala) breakdown += `<div class="price-row"><span>Kerala State Permit</span><span>Charges separate</span></div>`;
+    if (permitPondi) breakdown += `<div class="price-row"><span>Pondicherry State Permit</span><span>Charges separate</span></div>`;
   }
 
   breakdown += `<div class="price-row"><span>Total Estimated Cost</span><span>₹${total.toLocaleString('en-IN')}</span></div>`;
@@ -410,6 +419,8 @@ function handleBooking(e) {
   const acType = document.getElementById('b-ac').value;
   const nightBata = document.getElementById('b-night').checked;
   const hillsDiesel = document.getElementById('b-hills-diesel') && document.getElementById('b-hills-diesel').checked;
+  const permitKerala = document.getElementById('b-permit-kerala') && document.getElementById('b-permit-kerala').checked;
+  const permitPondi = document.getElementById('b-permit-pondicherry') && document.getElementById('b-permit-pondicherry').checked;
   const dropDate = document.getElementById('b-dropdate') ? document.getElementById('b-dropdate').value : '';
   const travelDays = document.getElementById('b-days') ? document.getElementById('b-days').value : '';
 
@@ -522,9 +533,17 @@ function handleBooking(e) {
     if (hillsDiesel) {
       packageInfo += `🏔️ *Hills Station Trip:* Yes\n`;
     }
+    if (permitKerala) {
+      packageInfo += `🌴 *Kerala Permit:* Yes\n`;
+    }
+    if (permitPondi) {
+      packageInfo += `🏖️ *Pondicherry Permit:* Yes\n`;
+    }
     priceInfo = `${totalKm} KM × ₹${vehicle.extraKm}/km: ₹${kmCost.toLocaleString('en-IN')}\n`;
     if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
     if (hillsDiesel) priceInfo += `Hills Allowance: Charges separate\n`;
+    if (permitKerala) priceInfo += `Kerala Permit: Charges separate\n`;
+    if (permitPondi) priceInfo += `Pondicherry Permit: Charges separate\n`;
   }
 
   const tripTypes = { local: 'Local Trip', days: 'Days Package', airport: 'Airport Transfer', long: 'Long Trip', tour: 'Tour Package', navagraha: 'Navagraha Trip' };
