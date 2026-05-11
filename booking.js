@@ -7,7 +7,7 @@ const vehicles = [
   { id: 'innova-ac', name: 'Innova', ac: 'ac', seats: '7+1', type: 'MPV', img: 'innova.png?v=2', prices: { 3: null, 6: 2500, 9: null, 12: 5000 }, extraKm: 16, extraHr: 200 },
   { id: 'crysta-ac', name: 'Crysta', ac: 'ac', seats: '7+1', type: 'Premium MPV', img: 'crysta.png', prices: { 3: null, 6: 3000, 9: null, 12: 6000 }, extraKm: 17, extraHr: 200 },
   { id: 'van16-nonac', name: 'Van (16 Seat)', ac: 'nonac', seats: '16', type: 'Van', img: 'van.png', prices: { 3: null, 6: 3000, 9: null, 12: 5500 }, extraKm: 20, extraHr: 250 },
-  { id: 'van21-nonac', name: 'Van (17 Seat)', ac: 'nonac', seats: '17', type: 'Van', img: 'van.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
+  { id: 'van21-nonac', name: 'Van (19 Seat)', ac: 'nonac', seats: '19', type: 'Van', img: 'van.png', prices: { 3: null, 6: 4000, 9: null, 12: 6500 }, extraKm: 24, extraHr: 250 },
   { id: 'van21-ac', name: 'Van (21 Seat)', ac: 'ac', seats: '21', type: 'Van', img: 'van.png', prices: { 3: null, 6: null, 9: null, 12: 8000 }, extraKm: 28, extraHr: 280 },
   { id: 'urbania16-ac', name: 'Force Urbania (16 Seat)', ac: 'ac', seats: '16', type: 'Premium Van', img: 'urbania.png?v=4', prices: { 3: null, 6: null, 9: null, 12: 11000 }, extraKm: 40, extraHr: 300 },
   { id: 'tempo14-nonac', name: 'Tempo (14 Seat)', ac: 'nonac', seats: '14', type: 'Mini Bus', img: 'tempo-traveller.png', prices: { 3: null, 6: 3500, 9: null, 12: 6000 }, extraKm: 22, extraHr: 250 },
