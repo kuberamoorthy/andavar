@@ -239,6 +239,17 @@
               <label for="b-totalkm" id="label-km">Estimated KM *</label>
               <input type="number" id="b-totalkm" class="form-control" placeholder="Enter estimated KM" min="1">
             </div>
+            <div class="form-group" id="group-local-km" style="display:none;">
+              <label for="b-localkm">Select Estimated KM *</label>
+              <select id="b-localkm" class="form-control">
+                <option value="">Select KM</option>
+                <option value="10">10 KM</option>
+                <option value="20">20 KM</option>
+                <option value="30">30 KM</option>
+                <option value="40">40 KM</option>
+                <option value="50">50 KM</option>
+              </select>
+            </div>
             <div class="form-group" id="group-persons" style="display:none;">
               <label for="b-persons">How Many Persons? *</label>
               <input type="number" id="b-persons" class="form-control" placeholder="E.g., 5" min="1" max="50">
@@ -260,15 +271,11 @@
             <input type="hidden" id="b-vehicle" required>
           </div>
 
-          <!-- EXTRA KM & HOURS (Only for Package) -->
+          <!-- EXTRA KM (Only for Package) -->
           <div class="form-row" id="extraInputs" style="display:none;">
             <div class="form-group">
               <label for="b-extrakm">Extra KM (if any)</label>
               <input type="number" id="b-extrakm" class="form-control" placeholder="0" value="0" min="0">
-            </div>
-            <div class="form-group">
-              <label for="b-extrahrs">Extra Hours (if any)</label>
-              <input type="number" id="b-extrahrs" class="form-control" placeholder="0" value="0" min="0">
             </div>
           </div>
 

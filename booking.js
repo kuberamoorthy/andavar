@@ -70,10 +70,12 @@ function updateDynamicInputs() {
   const groupVehicle = document.getElementById('group-vehicle');
   const groupHillsDiesel = document.getElementById('group-hills-diesel');
   const groupLongDates = document.getElementById('group-long-dates');
+  const groupLocalKm = document.getElementById('group-local-km');
 
   // Reset displays
   groupHours.style.display = 'none';
   groupKm.style.display = 'none';
+  if (groupLocalKm) groupLocalKm.style.display = 'none';
   if (groupAirport) groupAirport.style.display = 'none';
   if (groupPersons) groupPersons.style.display = 'none';
   if (groupHillsDiesel) groupHillsDiesel.style.display = 'none';
@@ -89,6 +91,7 @@ function updateDynamicInputs() {
   // Reset required
   document.getElementById('b-hours').required = false;
   document.getElementById('b-totalkm').required = false;
+  if (document.getElementById('b-localkm')) document.getElementById('b-localkm').required = false;
   if (document.getElementById('b-time')) document.getElementById('b-time').required = true;
   if (document.getElementById('b-airport')) document.getElementById('b-airport').required = false;
   if (document.getElementById('b-persons')) document.getElementById('b-persons').required = false;
@@ -127,7 +130,7 @@ function updateDynamicInputs() {
       }
     }
   } else if (currentTripType === 'local') {
-    // Local trips just book the vehicle without upfront KM estimate
+    // Local trips: just select vehicle and book, no KM or price
   } else {
     // Long trip or other
     groupKm.style.display = 'block';
@@ -247,7 +250,7 @@ function setupListeners() {
   document.getElementById('calcBtn').addEventListener('click', calculatePrice);
 
   // Auto calculate on field change
-  ['b-hours', 'b-totalkm', 'b-extrakm', 'b-extrahrs', 'b-night', 'b-hills-diesel', 'b-airport', 'b-persons'].forEach(id => {
+  ['b-hours', 'b-totalkm', 'b-localkm', 'b-extrakm', 'b-night', 'b-hills-diesel', 'b-airport', 'b-persons'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', () => {
       if (id === 'b-airport') updateDynamicInputs();
@@ -297,17 +300,14 @@ function calculatePrice(e) {
     }
 
     const extraKm = parseInt(document.getElementById('b-extrakm').value) || 0;
-    const extraHrs = parseInt(document.getElementById('b-extrahrs').value) || 0;
     const extraKmCost = extraKm * vehicle.extraKm;
-    const extraHrCost = extraHrs * vehicle.extraHr;
     const nightCost = nightBata ? 500 : 0;
 
-    total = basePrice + extraKmCost + extraHrCost + nightCost;
+    total = basePrice + extraKmCost + nightCost;
 
     const durationKm = { 3: 50, 6: 100, 9: 150, 12: 200 };
     breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}) — ${duration} hrs / ${durationKm[duration]} km</span><span>₹${basePrice.toLocaleString('en-IN')}</span></div>`;
     if (extraKmCost > 0) breakdown += `<div class="price-row"><span>Extra ${extraKm} KM × ₹${vehicle.extraKm}/km</span><span>₹${extraKmCost.toLocaleString('en-IN')}</span></div>`;
-    if (extraHrCost > 0) breakdown += `<div class="price-row"><span>Extra ${extraHrs} Hours × ₹${vehicle.extraHr}/hr</span><span>₹${extraHrCost.toLocaleString('en-IN')}</span></div>`;
     if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
   } else if (currentTripType === 'airport' && document.getElementById('b-airport').value !== 'other') {
     const airport = document.getElementById('b-airport').value;
@@ -364,20 +364,8 @@ function calculatePrice(e) {
     if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
     breakdown += `<div class="price-note" style="color:var(--text-light); font-size:0.85rem; margin-top:8px;">* Temple parking, driver food, and police charges (if any) are separate.</div>`;
   } else if (currentTripType === 'local') {
-    const nightCost = nightBata ? 500 : 0;
-    total = nightCost;
-    
-    breakdown += `<div class="price-row"><span>${vehicle.name} (${vehicle.ac === 'ac' ? 'AC' : 'Non AC'})</span><span>₹${vehicle.extraKm} / km</span></div>`;
-    if (nightCost > 0) breakdown += `<div class="price-row"><span>Night Driver Bata</span><span>₹500</span></div>`;
-    breakdown += `<div class="price-note" style="color:var(--text-light); font-size:0.85rem; margin-top:8px;">* Final price calculated based on actual distance traveled.</div>`;
-    
-    priceDisplay.style.display = 'block';
-    document.getElementById('priceAmount').textContent = `₹${vehicle.extraKm} / KM`;
-    document.getElementById('priceBreakdown').innerHTML = breakdown;
-    
-    if (isClick) {
-      priceDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    // Local trip: no price display, just booking
+    priceDisplay.style.display = 'none';
     return;
   } else {
     const totalKm = parseInt(document.getElementById('b-totalkm').value);
@@ -440,7 +428,6 @@ function handleBooking(e) {
   if (currentTripType === 'days') {
     const duration = document.getElementById('b-hours').value;
     const extraKm = parseInt(document.getElementById('b-extrakm').value) || 0;
-    const extraHrs = parseInt(document.getElementById('b-extrahrs').value) || 0;
     
     if (!duration) {
       alert('Please select a duration package.');
@@ -454,16 +441,14 @@ function handleBooking(e) {
     }
 
     const extraKmCost = extraKm * vehicle.extraKm;
-    const extraHrCost = extraHrs * vehicle.extraHr;
     const nightCost = nightBata ? 500 : 0;
-    total = basePrice + extraKmCost + extraHrCost + nightCost;
+    total = basePrice + extraKmCost + nightCost;
 
     const durationKm = { 3: 50, 6: 100, 9: 150, 12: 200 };
     packageInfo = `⏱️ *Package:* ${duration} Hours / ${durationKm[parseInt(duration)]} KM\n`;
     
     priceInfo = `Base Package: ₹${basePrice.toLocaleString('en-IN')}\n`;
     if (extraKmCost > 0) priceInfo += `Extra ${extraKm} KM: ₹${extraKmCost.toLocaleString('en-IN')}\n`;
-    if (extraHrCost > 0) priceInfo += `Extra ${extraHrs} Hrs: ₹${extraHrCost.toLocaleString('en-IN')}\n`;
     if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
   } else if (currentTripType === 'airport' && document.getElementById('b-airport').value !== 'other') {
     const airport = document.getElementById('b-airport').value;
@@ -519,13 +504,9 @@ function handleBooking(e) {
     priceInfo += `(Temple parking, driver food, and police charges separate)\n`;
     if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
   } else if (currentTripType === 'local') {
-    const nightCost = nightBata ? 500 : 0;
-    total = nightCost;
-    
+    // Local trip: simple booking, no price
     packageInfo = `🏙️ *Local Trip*\n`;
-    priceInfo = `Per KM Rate: ₹${vehicle.extraKm}/km\n`;
-    priceInfo += `(Final price based on actual usage)\n`;
-    if (nightCost > 0) priceInfo += `Night Bata: ₹500\n`;
+    priceInfo = `Price will be discussed separately.\n`;
   } else {
     const totalKm = document.getElementById('b-totalkm').value;
     if (!totalKm) {
@@ -576,12 +557,17 @@ function handleBooking(e) {
   }
   
   msg += packageInfo + `\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `💰 *PRICE BREAKDOWN*\n\n`;
-  msg += priceInfo;
-  msg += `\n*💵 TOTAL: ₹${total.toLocaleString('en-IN')}*\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `_Toll, parking & driver food extra_`;
+  if (currentTripType === 'local') {
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `_Toll, parking & driver food extra_`;
+  } else {
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `💰 *PRICE BREAKDOWN*\n\n`;
+    msg += priceInfo;
+    msg += `\n*💵 TOTAL: ₹${total.toLocaleString('en-IN')}*\n`;
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `_Toll, parking & driver food extra_`;
+  }
 
   const whatsappUrl = `https://wa.me/918610890499?text=${encodeURIComponent(msg)}`;
   
