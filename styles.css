@@ -853,7 +853,7 @@ select.form-control {
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 24px;
 }
 
 textarea.form-control {
@@ -903,6 +903,13 @@ textarea.form-control {
   border-radius: 24px;
   padding: 48px;
   box-shadow: var(--shadow-lg);
+}
+
+/* Hide floating CTA and back-to-top buttons on booking page to avoid blocking form input fields */
+.booking-page .whatsapp-float,
+.booking-page .phone-float,
+.booking-page .back-top {
+  display: none;
 }
 
 .vehicle-select-grid {
@@ -1336,6 +1343,12 @@ textarea.form-control {
 
   .form-row {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .booking-tab {
+    padding: 10px 18px;
+    font-size: 0.85rem;
   }
 
   .back-top {

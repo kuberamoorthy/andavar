@@ -102,7 +102,7 @@ function updateDynamicInputs() {
 
   if (currentTripType === 'days') {
     groupHours.style.display = 'block';
-    extraInputs.style.display = 'flex';
+    extraInputs.style.display = 'grid';
     document.getElementById('b-hours').required = true;
   } else if (currentTripType === 'airport') {
     if (airportBanner) airportBanner.style.display = 'block';
@@ -137,7 +137,7 @@ function updateDynamicInputs() {
     document.getElementById('b-totalkm').required = true;
     document.getElementById('label-km').textContent = 'Estimated KM *';
     if (groupLongDates && (currentTripType === 'long' || currentTripType === 'tour')) {
-      groupLongDates.style.display = 'flex';
+      groupLongDates.style.display = 'grid';
       document.getElementById('b-dropdate').required = true;
       document.getElementById('b-days').required = true;
     }
