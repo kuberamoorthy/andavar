@@ -2,8 +2,8 @@
 const vehicles = [
   { id: 'swift-nonac', name: 'Swift / Etios', ac: 'nonac', seats: '4+1', type: 'Sedan', img: 'swift-etios.png', prices: { 3: 1000, 6: 1500, 9: 2400, 12: 3000 }, extraKm: 11, extraHr: 100 },
   { id: 'swift-ac', name: 'Swift / Etios', ac: 'ac', seats: '4+1', type: 'Sedan', img: 'Etios.png', prices: { 3: 1200, 6: 1800, 9: 2700, 12: 3500 }, extraKm: 12, extraHr: 100 },
-  { id: 'xylo-nonac', name: 'Xylo / Tavera', ac: 'nonac', seats: '6+1', type: 'SUV', img: 'xylo-tavera.png', prices: { 3: 1400, 6: 2000, 9: 3200, 12: 4000 }, extraKm: 14, extraHr: 150 },
-  { id: 'xylo-ac', name: 'Xylo / Tavera', ac: 'ac', seats: '6+1', type: 'SUV', img: 'Tavera.png', prices: { 3: 1800, 6: 2500, 9: 3700, 12: 4500 }, extraKm: 15, extraHr: 150 },
+  { id: 'xylo-nonac', name: 'Xylo / Tavera', ac: 'nonac', seats: '7+1', type: 'SUV', img: 'xylo-tavera.png', prices: { 3: 1400, 6: 2000, 9: 3200, 12: 4000 }, extraKm: 14, extraHr: 150 },
+  { id: 'xylo-ac', name: 'Xylo / Tavera', ac: 'ac', seats: '7+1', type: 'SUV', img: 'Tavera.png', prices: { 3: 1800, 6: 2500, 9: 3700, 12: 4500 }, extraKm: 15, extraHr: 150 },
   { id: 'innova-ac', name: 'Innova', ac: 'ac', seats: '7+1', type: 'MPV', img: 'innova.png?v=2', prices: { 3: null, 6: 2500, 9: null, 12: 5000 }, extraKm: 16, extraHr: 200 },
   { id: 'crysta-ac', name: 'Crysta', ac: 'ac', seats: '7+1', type: 'Premium MPV', img: 'crysta.png', prices: { 3: null, 6: 3000, 9: null, 12: 6000 }, extraKm: 17, extraHr: 200 },
   { id: 'van17-nonac', name: 'Van (17 Seat)', ac: 'nonac', seats: '17', type: 'Van', img: 'van.png', prices: { 3: null, 6: 3000, 9: null, 12: 5500 }, extraKm: 20, extraHr: 250 },
@@ -138,10 +138,7 @@ function updateDynamicInputs() {
     if (groupPersons) groupPersons.style.display = 'block';
     if (document.getElementById('b-persons')) document.getElementById('b-persons').required = true;
     if (groupVehicle) {
-      const persons = document.getElementById('b-persons')?.value;
-      if (!persons || parseInt(persons) <= 0) {
-        groupVehicle.style.display = 'none';
-      }
+      // Show vehicle grid by default, do not hide it
     }
   } else if (currentTripType === 'local') {
     // Local trips: just select vehicle and book, no KM or price
@@ -204,14 +201,8 @@ function renderVehicleGrid() {
     };
     filtered = filtered.filter(v => navagrahaPrices[v.id] !== undefined);
     
-    const personCount = parseInt(document.getElementById('b-persons')?.value);
-    if (personCount && personCount > 0) {
-      filtered = filtered.filter(v => {
-        const capacityMatch = v.seats.match(/(\d+)/);
-        const capacity = capacityMatch ? parseInt(capacityMatch[1]) : 0;
-        return capacity >= personCount;
-      });
-    }
+    // Show all vehicles, no capacity hiding filter
+    // Let the user select any vehicle and show warn indicators instead of hiding them
   }
 
   if (acFilter) {
@@ -381,6 +372,17 @@ function calculatePrice(e) {
     total = basePrice;
 
     breakdown += `<div class="price-row"><span>1 Day Navagraha Trip (5 AM - 10 PM) — ${vehicle.name} ${vehicle.ac === 'ac' ? 'AC' : 'Non AC'}</span><span>₹${basePrice.toLocaleString('en-IN')}</span></div>`;
+    
+    // Warn if selected vehicle capacity is less than the entered persons count
+    const personCount = parseInt(document.getElementById('b-persons')?.value);
+    if (personCount && personCount > 0) {
+      const capacityMatch = vehicle.seats.match(/(\d+)/);
+      const capacity = capacityMatch ? parseInt(capacityMatch[1]) : 0;
+      if (personCount > capacity) {
+        breakdown += `<div style="color: #ef4444; font-size: 0.82rem; margin-top: 10px; font-weight: 600; line-height: 1.4; border: 1px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05); padding: 10px; border-radius: 8px;">⚠️ Warning: You entered ${personCount} persons, but ${vehicle.name}'s seating capacity is only ${vehicle.seats}. Please select a larger vehicle or proceed if you are booking multiple vehicles.</div>`;
+      }
+    }
+    
     breakdown += `<div class="price-note" style="color:var(--text-light); font-size:0.85rem; margin-top:8px;">* Temple parking, driver food, and police charges (if any) are separate.</div>`;
   } else if (currentTripType === 'local') {
     // Local trip: no price display, just booking
@@ -451,6 +453,21 @@ function handleBooking(e) {
 
   const vehicle = vehicles.find(v => v.id === selectedVehicleId);
   if (!vehicle) return;
+
+  // Warn if selected vehicle capacity is less than entered persons count (only for Navagraha Trip)
+  const personsInput = document.getElementById('b-persons');
+  if (currentTripType === 'navagraha' && personsInput) {
+    const personCount = parseInt(personsInput.value);
+    if (personCount && personCount > 0) {
+      const capacityMatch = vehicle.seats.match(/(\d+)/);
+      const capacity = capacityMatch ? parseInt(capacityMatch[1]) : 0;
+      if (personCount > capacity) {
+        if (!confirm(`Warning: You entered ${personCount} persons, but ${vehicle.name} only fits up to ${vehicle.seats} persons.\n\nDo you want to proceed anyway?`)) {
+          return;
+        }
+      }
+    }
+  }
 
   let total = 0;
   let packageInfo = '';
